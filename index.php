@@ -5,18 +5,18 @@ include 'view/content.php';
 include 'view/footer.php';
 
 // require_once 'Database.php';
-require_once 'Config.php';
+// require_once 'Config.php';
 
-$GLOBALS['config'] = [
-    'mysql' => [
-        'host' => 'MySQL-8.2',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'kisslink',  
-    ]
-]; 
+// $GLOBALS['config'] = [
+//     'mysql' => [
+//         'host' => 'MySQL-8.2',
+//         'username' => 'root',
+//         'password' => '',
+//         'database' => 'kisslink',  
+//     ]
+// ]; 
 
-echo Config::get('mysql.host');
+// echo Config::get('mysql.host');
 
 // $users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe', 'Jane Koe']);
 // $users = Database::getInstance()->get('users', ['password', '=', 'password']);
