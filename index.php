@@ -1,11 +1,14 @@
 <?php
+require_once 'Database.php';
+require_once 'Config.php';
 
-include 'view/header.php';
-include 'view/content.php';
-include 'view/footer.php';
+include 'view/Registration.php';
 
-// require_once 'Database.php';
-// require_once 'Config.php';
+// include 'view/header.php';
+// include 'view/content.php';
+// include 'view/footer.php';
+
+
 
 // $GLOBALS['config'] = [
 //     'mysql' => [
@@ -18,6 +21,8 @@ include 'view/footer.php';
 
 // echo Config::get('mysql.host');
 
+
+        
 // $users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe', 'Jane Koe']);
 // $users = Database::getInstance()->get('users', ['password', '=', 'password']);
 // Database::getInstance()->delete('users', ['username', '=', 'Jane Koe']);
