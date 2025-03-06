@@ -23,7 +23,7 @@ require_once 'Input.php';
 // echo Config::get('mysql.host');
 
 
-        
+
 // $users = Database::getInstance()->query("SELECT * FROM users WHERE username IN (?, ?)", ['John Doe', 'Jane Koe']);
 // $users = Database::getInstance()->get('users', ['password', '=', 'password']);
 // Database::getInstance()->delete('users', ['username', '=', 'Jane Koe']);
@@ -44,7 +44,7 @@ require_once 'Input.php';
 
 
 
-if(Input::existst()) {
+if (Input::exists()) {
     $validate = new Validate();
 
     $validation = $validate->check($_POST, [
@@ -61,22 +61,27 @@ if(Input::existst()) {
         'password_again' => [
             'required' => true,
             'matches' => 'password'
-        ]
-        ]);
+        ],
+        // 'my_ file' => [
+        //     'file' => true  
+        // ]
+    ]);
 
-        if ($validation->passed()) {
-            echo 'passed';
-        } else {
-            foreach($validation->errors() as $error) {
-                echo $error . "<br>";
-            }
+    if ($validation->passed()) {
+        echo 'passed';
+    } else {
+        foreach ($validation->errors() as $error) {
+            echo $error . "<br>";
         }
+    }
+}
 ?>
+
 
 <form action="" method="post">
     <div class="field">
         <label for="username">Username</label>
-        <input type="text" name="username" value="<?php echo Input::get('username')?>">
+        <input type="text" name="username" value="<?php echo Input::get('username') ?>">
     </div>
 
     <div class="field">
@@ -88,7 +93,9 @@ if(Input::existst()) {
         <label for="">Password Again</label>
         <input type="text" name="password_again">
     </div>
-    
+
+    <!-- <input type="file" name="my_file"> -->
+
     <div class="field">
         <button type="submit">Submit</button>
     </div>
