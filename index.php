@@ -1,8 +1,12 @@
 <?php
+session_start();
+
 require_once 'Database.php';
 require_once 'Config.php';
 require_once 'Validation.php';
 require_once 'Input.php';
+require_once 'Token.php';
+// require_once 'Session.php';
 
 
 // include 'view/header.php';
@@ -16,9 +20,13 @@ $GLOBALS['config'] = [
         'host' => 'MySQL-8.2',
         'username' => 'root',
         'password' => '',
-        'database' => 'kisslink',  
+        'database' => 'kisslink',
+    ],
+
+    'session' => [
+        'token_name' => 'token'
     ]
-]; 
+];
 
 // echo Config::get('mysql.host');
 
@@ -45,33 +53,32 @@ $GLOBALS['config'] = [
 
 
 if (Input::exists()) {
-    $validate = new Validate();
+    if (Token::check(Input::get('token'))) {
+        $validate = new Validate();
 
-    $validation = $validate->check($_POST, [
-        'username' => [
-            'required' => true,
-            'min' => 2,
-            'max' => 32,
-            'unique' => 'users'
-        ],
-        'password' => [
-            'required' => true,
-            'min' => 3
-        ],
-        'password_again' => [
-            'required' => true,
-            'matches' => 'password'
-        ],
-        // 'my_ file' => [
-        //     'file' => true  
-        // ]
-    ]);
+        $validation = $validate->check($_POST, [
+            'username' => [
+                'required' => true,
+                'min' => 2,
+                'max' => 32,
+                'unique' => 'users'
+            ],
+            'password' => [
+                'required' => true,
+                'min' => 3
+            ],
+            'password_again' => [
+                'required' => true,
+                'matches' => 'password'
+            ],
+        ]);
 
-    if ($validation->passed()) {
-        echo 'passed';
-    } else {
-        foreach ($validation->errors() as $error) {
-            echo $error . "<br>";
+        if ($validation->passed()) {
+            echo 'passed';
+        } else {
+            foreach ($validation->errors() as $error) {
+                echo $error . "<br>";
+            }
         }
     }
 }
@@ -94,7 +101,7 @@ if (Input::exists()) {
         <input type="text" name="password_again">
     </div>
 
-    <!-- <input type="file" name="my_file"> -->
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
     <div class="field">
         <button type="submit">Submit</button>
