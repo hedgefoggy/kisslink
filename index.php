@@ -11,14 +11,14 @@ require_once 'Input.php';
 
 
 
-// $GLOBALS['config'] = [
-//     'mysql' => [
-//         'host' => 'MySQL-8.2',
-//         'username' => 'root',
-//         'password' => '',
-//         'database' => 'kisslink',  
-//     ]
-// ]; 
+$GLOBALS['config'] = [
+    'mysql' => [
+        'host' => 'MySQL-8.2',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'kisslink',  
+    ]
+]; 
 
 // echo Config::get('mysql.host');
 
