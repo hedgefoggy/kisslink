@@ -6,7 +6,9 @@ require_once 'Config.php';
 require_once 'Validation.php';
 require_once 'Input.php';
 require_once 'Token.php';
-// require_once 'Session.php';
+require_once 'Session.php';
+require_once 'User.php';
+require_once 'Redirect.php';
 
 
 // include 'view/header.php';
@@ -50,7 +52,8 @@ $GLOBALS['config'] = [
 //     }
 // }
 
-
+// Redirect::to('test.php');
+Redirect::to(404);
 
 if (Input::exists()) {
     if (Token::check(Input::get('token'))) {
@@ -74,11 +77,18 @@ if (Input::exists()) {
         ]);
 
         if ($validation->passed()) {
-            
+
             // Database
+            $user = new User;
+
+            $user->create([
+                'username' => Input::get('username'),
+                'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT)
+            ]);
 
             Session::flash('success', 'register success');
             // header('Location: /test.php');
+
         } else {
             foreach ($validation->errors() as $error) {
                 echo $error . "<br>";
@@ -90,7 +100,7 @@ if (Input::exists()) {
 
 
 <form action="" method="post">
-    <?php echo Session::flash('success');  ?>
+    <?php echo Session::flash('success'); ?>
     <div class="field">
         <label for="username">Username</label>
         <input type="text" name="username" value="<?php echo Input::get('username') ?>">
