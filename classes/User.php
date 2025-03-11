@@ -12,4 +12,12 @@ class User {
     {
         $this->db->insert('users', $fields);
     }
+
+    public function login($email = null, $password = null) {
+        if ($email) {
+            $user = $this->db->get('users', ['email', '=', $email])->first();
+            var_dump($user);
+            exit;
+        }
+    }
 }
