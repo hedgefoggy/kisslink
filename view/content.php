@@ -1,16 +1,8 @@
-<button type="submit">Log Out</button>
-    <br>
-<form action="/" method="post" enctype="multipart/form-data" class="centered-form">
-    <div class="avatar-container">
-        <img src="uploads/avatars" class="avatar" alt="Photo" style="display: none;">
-    </div>
-    <label>Username</label>
-    <br>
-    <input type="file" name="avatar" accept="image/*">
-    <br>
-    <button type="submit">Upload</button>
-    <br>
-    
-    <textarea class="custom-textarea"></textarea>
-    <button type="button" id="loadTextButton">Upload post</button>
-</form>
+<?php include 'header.php'; ?>
+
+<a href="../login.php">Login</a>
+<a href="../register.php">Registration</a>
+<div class="avatar-container">
+    <img src="uploads/avatars" class="avatar" style="display: none;">
+</div>
+<label>Username</label>

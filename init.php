@@ -26,8 +26,22 @@ $GLOBALS['config'] = [
     ],
 
     'session' => [
-        'token_name' => 'token'
+        'token_name' => 'token',
+        'user_session' => 'user'
+    ],
+
+    'cookie' => [
+        'cookie_name' => 'hash',
+        'cookie_expiry' => 604800
     ]
 ];
 
-// echo Config::get('mysql.host');
+if(Cookie::exist(Config::get('cookie.cookie_name')) && !Session::exists(Config::get('session.user_session'))) {
+    $hash = Cookie::get(Config::get('cookie.cookie_name'));
+    $hashCheck = Database::getInstance()->get('user_session', ['hash', '=', $hash]);
+
+    if($hashCheck->count()) {
+        $user = new User($hashCheck->first()->user_id);
+        $user->login();
+    }
+}

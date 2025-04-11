@@ -51,6 +51,7 @@ if (Input::exists()) {
 }
 ?>
 
+<?php include 'view/header.php';?>
 
 <form action="" method="post">
     <?php echo Session::flash('success'); ?>
@@ -80,3 +81,6 @@ if (Input::exists()) {
         <button type="submit">Submit</button>
     </div>
 </form>
+
+<a href="view/content.php">Content</a>
+<a href="login.php">Login</a>
